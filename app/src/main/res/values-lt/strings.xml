@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Teksto Metrikos</string>
+    <string name="header_title">Teksto Metrikų Analizatorius</string>
+    <string name="header_subtitle">Skaičiuokite sakinius, žodžius, skyrybos ženklus ir skaitmenis</string>
+    
+    <string name="input_label">Analizuojamas tekstas</string>
+    <string name="input_hint">Įveskite arba įklijuokite tekstą čia&#8230;</string>
+    
+    <string name="btn_calculate">Skaičiuoti Metrikas</string>
+    <string name="btn_generate_test">Generuoti Pavyzdį</string>
+    <string name="btn_clear_input">Išvalyti Tekstą</string>
+    <string name="btn_clear_history">Išvalyti Istoriją</string>
+    
+    <string name="label_current_results">Dabartiniai Rezultatai</string>
+    <string name="label_history">Sesijos Istorija</string>
+    <string name="history_empty_message">Šioje sesijoje skaičiavimų dar neatlikta.</string>
+    
+    <string name="metric_sentences">Sakiniai</string>
+    <string name="metric_words">Žodžiai</string>
+    <string name="metric_punctuation">Skyrybos ženk.</string>
+    <string name="metric_digits">Skaitmenys</string>
+    
+    <string name="format_sentences">Sakiniai: %1$d</string>
+    <string name="format_words">Žodžiai: %1$d</string>
+    <string name="format_punctuation">Skyrybos ženklai: %1$d</string>
+    <string name="format_digits">Skaitmenys: %1$d</string>
+    <string name="format_history_item">\"%1$s\" => %2$d, %3$d, %4$d, %5$d</string>
+    
+    <string name="error_empty_input">Teksto laukas negali būti tuščias. Įveskite tekstą arba sugeneruokite pavyzdį.</string>
+    <string name="history_cleared_toast">Skaičiavimų istorija išvalyta.</string>
+    <string name="sample_loaded_toast">Testinis sakinys įkeltas.</string>
+
+    <string-array name="sample_sentences">
+        <item>The war started on September 1. Sad.</item>
+        <item>Labas rytas</item>
+        <item>2024 metais komanda pelnė 98 taškus per 3 rungtynes! Tai buvo nuostabu.</item>
+        <item>Android programavimas su Java ir XML: patikimas, aiškus ir tvarkingas.</item>
+        <item>Vienas, du, trys... Ar pasiruošę? Pradėkime!</item>
+        <item>Kambario numeris yra 404, o daiktas #12 rastas 09:30 val.</item>
+    </string-array>
+</resources>

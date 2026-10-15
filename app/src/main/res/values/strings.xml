@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Text Metrics</string>
+    <string name="header_title">Text Metrics Analyzer</string>
+    <string name="header_subtitle">Count sentences, words, punctuation marks, and digits</string>
+    
+    <string name="input_label">Text to analyze</string>
+    <string name="input_hint">Enter or paste your text here&#8230;</string>
+    
+    <string name="btn_calculate">Calculate Metrics</string>
+    <string name="btn_generate_test">Generate Test Text</string>
+    <string name="btn_clear_input">Clear Input</string>
+    <string name="btn_clear_history">Clear History</string>
+    
+    <string name="label_current_results">Current Results</string>
+    <string name="label_history">Runtime History</string>
+    <string name="history_empty_message">No calculations recorded yet in this session.</string>
+    
+    <string name="metric_sentences">Sentences</string>
+    <string name="metric_words">Words</string>
+    <string name="metric_punctuation">Punctuation</string>
+    <string name="metric_digits">Digits</string>
+    
+    <string name="format_sentences">Sentences: %1$d</string>
+    <string name="format_words">Words: %1$d</string>
+    <string name="format_punctuation">Punctuation: %1$d</string>
+    <string name="format_digits">Digits: %1$d</string>
+    <string name="format_history_item">\"%1$s\" => %2$d, %3$d, %4$d, %5$d</string>
+    
+    <string name="error_empty_input">Input cannot be empty. Please enter text or generate sample text.</string>
+    <string name="history_cleared_toast">Calculation history has been cleared.</string>
+    <string name="sample_loaded_toast">Test sentence inserted.</string>
+
+    <string-array name="sample_sentences">
+        <item>The war started on September 1. Sad.</item>
+        <item>Good morning</item>
+        <item>In 2024, the team scored 98 points across 3 matches! That was outstanding.</item>
+        <item>Android development with Java &amp; XML Views: reliable, robust, and clean.</item>
+        <item>One, two, three... Are you ready? Let\'s begin!</item>
+        <item>The room number is 404, but item #12 was found at 9:30 AM.</item>
+    </string-array>
+</resources>
