@@ -5,13 +5,27 @@ import com.example.textmetrics.metrics.TextMetricsCalculator;
 
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
- * Unit tests for TextMetricsCalculator verifying all requirements and edge cases.
+ * Unit tests for TextMetricsCalculator verifying all requirements, boundary conditions,
+ * standalone helper methods, and 100% function/class coverage.
  */
 public class TextMetricsCalculatorTest {
+
+    @Test
+    public void testPrivateConstructorViaReflection() throws Exception {
+        Constructor<TextMetricsCalculator> constructor = TextMetricsCalculator.class.getDeclaredConstructor();
+        assertTrue("Constructor should be private", Modifier.isPrivate(constructor.getModifiers()));
+        constructor.setAccessible(true);
+        TextMetricsCalculator instance = constructor.newInstance();
+        assertNotNull("Instance should be successfully created", instance);
+    }
 
     @Test
     public void testGoodMorningExample() {
@@ -74,7 +88,7 @@ public class TextMetricsCalculatorTest {
 
     @Test
     public void testMultipleDigits() {
-        // User clarified: count individual numeric digits (e.g., 100 has 3 digits)
+        // Individual numeric digits: e.g. 101 has 3 digits, 2 has 1 digit => 4 total
         String text = "Room 101 has 2 chairs.";
         TextMetrics metrics = TextMetricsCalculator.calculate(text);
 
@@ -97,7 +111,7 @@ public class TextMetricsCalculatorTest {
 
     @Test
     public void testLithuanianCharacters() {
-        // "Lietuva" (1), "yra" (2), "graži" (3), "šalis" (4), "2026" (5), "metais" (6), "čia" (7), "gyvena" (8), "daug" (9), "žmonių" (10)
+        // Lithuanian text with Baltic diacritics
         String text = "Lietuva yra graži šalis. 2026 metais čia gyvena daug žmonių!";
         TextMetrics metrics = TextMetricsCalculator.calculate(text);
 
@@ -113,10 +127,8 @@ public class TextMetricsCalculatorTest {
         TextMetrics metrics = TextMetricsCalculator.calculate(text);
 
         assertEquals(1, metrics.getSentenceCount());
-        // "It's" (1), "a" (2), "state-of-the-art" (3), "solution" (4)
-        assertEquals(4, metrics.getWordCount());
-        // ' (1), - (3), . (1) => 5 punctuation marks
-        assertEquals(5, metrics.getPunctuationCount());
+        assertEquals(4, metrics.getWordCount()); // "It's", "a", "state-of-the-art", "solution"
+        assertEquals(5, metrics.getPunctuationCount()); // ', -, -, -, .
         assertEquals(0, metrics.getDigitCount());
     }
 
@@ -127,8 +139,8 @@ public class TextMetricsCalculatorTest {
         TextMetrics metrics = TextMetricsCalculator.calculate(text);
 
         assertEquals(2, metrics.getSentenceCount());
-        assertEquals(10, metrics.getWordCount()); // Pi(1), is(2), approximately(3), 3(4), 14(5), It(6), is(7), an(8), irrational(9), number(10)
-        assertEquals(3, metrics.getPunctuationCount()); // 3 periods total
+        assertEquals(10, metrics.getWordCount());
+        assertEquals(3, metrics.getPunctuationCount());
         assertEquals(3, metrics.getDigitCount()); // 3, 1, 4
     }
 
@@ -142,5 +154,41 @@ public class TextMetricsCalculatorTest {
         assertEquals(6, metrics.getWordCount());
         assertEquals(3, metrics.getPunctuationCount()); // \u2026, ?, .
         assertEquals(0, metrics.getDigitCount());
+    }
+
+    @Test
+    public void testDirectCountSentences() {
+        assertEquals(0, TextMetricsCalculator.countSentences(null));
+        assertEquals(0, TextMetricsCalculator.countSentences(""));
+        assertEquals(0, TextMetricsCalculator.countSentences("     "));
+        assertEquals(1, TextMetricsCalculator.countSentences("One single sentence without period"));
+        assertEquals(2, TextMetricsCalculator.countSentences("First sentence. Second sentence!"));
+        assertEquals(0, TextMetricsCalculator.countSentences("... ??? !!!"));
+    }
+
+    @Test
+    public void testDirectCountWords() {
+        assertEquals(0, TextMetricsCalculator.countWords(null));
+        assertEquals(0, TextMetricsCalculator.countWords(""));
+        assertEquals(0, TextMetricsCalculator.countWords("   \t\n  "));
+        assertEquals(3, TextMetricsCalculator.countWords("One two three"));
+        assertEquals(2, TextMetricsCalculator.countWords("user’s don't"));
+    }
+
+    @Test
+    public void testDirectCountPunctuation() {
+        assertEquals(0, TextMetricsCalculator.countPunctuation(null));
+        assertEquals(0, TextMetricsCalculator.countPunctuation(""));
+        assertEquals(0, TextMetricsCalculator.countPunctuation("Hello World 123"));
+        assertEquals(4, TextMetricsCalculator.countPunctuation("Hello, world! (Test)"));
+    }
+
+    @Test
+    public void testDirectCountDigits() {
+        assertEquals(0, TextMetricsCalculator.countDigits(null));
+        assertEquals(0, TextMetricsCalculator.countDigits(""));
+        assertEquals(0, TextMetricsCalculator.countDigits("No digits here."));
+        assertEquals(10, TextMetricsCalculator.countDigits("0123456789"));
+        assertEquals(3, TextMetricsCalculator.countDigits("Item #404: not found"));
     }
 }
